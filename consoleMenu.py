@@ -63,3 +63,10 @@ class Menu:
                     self.downselect()
                 elif key == 72: #Up arrow
                     self.upselect()
+
+    #Call after completion of selection.                
+    def get_selected_items(self):
+        holder = []
+        for x in self.enter_indices:
+            holder.append(self.arr[x])
+        return holder
