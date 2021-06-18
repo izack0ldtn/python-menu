@@ -15,7 +15,9 @@ class Menu_CheckBox:
         os.system('cls')
         if self.header != None:
             console.print(self.header,justify="center")
+        print()
         console.print(self.content, style ="red")
+        print()
         for x in range(len(self.arr)):
             print(self.entermanager(self.arr[x]),self.textManager(self.arr[x]))
 
@@ -54,42 +56,51 @@ class Menu_CheckBox:
                 return '[X]'
         return '[ ]'
 
-    def main(self):
-        self.consoleDisplay()
-        while True:
-            key = ord(getch())
-            if key == 27: #ESC
-                break
-            elif key == 13: #Enter
-                self.entercase()
-            elif key == 224: #Special keys (arrows, f keys, ins, del, etc.)
-                key = ord(getch())
-                if key == 80: #Down arrow
-                    self.downselect()
-                elif key == 72: #Up arrow
-                    self.upselect()
+    def exitcase(self):
+        return self.get_selected_items()
 
-    #Call after completion of selection.                
     def get_selected_items(self):
         holder = []
         for x in self.enter_indices:
             holder.append(self.arr[x])
         return holder
 
+    def main(self):
+        self.consoleDisplay()
+        while True:
+            key = ord(getch())
+            if key == 27: #ESC
+                return "CLI"
+            elif key == 13: #Enter
+                self.entercase()
+            elif key == 32 : #Space 
+                return self.exitcase()
+            elif key == 224: #Special keys (arrows, f keys, ins, del, etc.)
+                key = ord(getch())
+                if key == 80: #Down arrow
+                    self.downselect()
+                elif key == 72: #Up arrow
+                    self.upselect()
+              
+
+
 class Menu_RadioButton:
 
     selected = 0
 
-    def __init__(self,array,headertext=None):
+    def __init__(self,array,statement,headertext=None):
         self.arr = array
         self.header = headertext
-
+        self.content = statement
     def consoleDisplay(self):
         os.system('cls')
         if self.header != None:
             print(self.header)
+        print()
+        console.print(self.content)
+        print()
         for eachItems in self.arr:
-            print(self.textManager(eachItems))
+            print("►",self.textManager(eachItems))
 
     def upselect(self):
         if self.selected <= 0:
@@ -119,7 +130,7 @@ class Menu_RadioButton:
         while True:
             key = ord(getch())
             if key == 27: #ESC
-                break
+                return "CLI"
             elif key == 13: #Enter
                 return self.entercase()
             elif key == 224: #Special keys (arrows, f keys, ins, del, etc.)
