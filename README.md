@@ -1,5 +1,1 @@
-Python console menu using rich module.
-create a instance and pass a list of item you want as menu to the constructor. 
-run method .main() to execute it anywhere.
-Multiple select and single select. 
-
+This is a simple example of making python console selectable menu. This module uses rich module to highlight text. It is based on each interaction refresh architecture which is not very useful for big menu but it is light weigthed and easy to use for simple programs.
